@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Lirik dan Kunci Lagu</title>
+  <style>
+    body { font-family: sans-serif; margin: 40px; background: #f2f2f2; }
+    pre { background: white; padding: 20px; border-radius: 8px; }
+    button { margin-right: 10px; padding: 8px 16px; }
+  </style>
+</head>
+  <script>
+  const chords = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+
+  function transpose(step) {
+    const pre = document.getElementById("chords");
+    let text = pre.innerText;
+    let regex = new RegExp("\\b(" + chords.join("|") + ")\\b", "g");
+    text = text.replace(regex, function(match) {
+      let i = chords.indexOf(match);
+      if (i === -1) return match;
+      let newChord = chords[(i + step + chords.length) % chords.length];
+      return newChord;
+    });
+    pre.innerText = text;
+  }
+</script>
+<body>
+  <h1>Lagu: Bapa yang Kekal</h1>
+  <pre id="chords">
+C       G       Am      F
+Bapa yang kekal, kasihMu nyata
+C       G        F       C
+Tak akan berubah sampai selamanya
+  </pre>
+
+  <button onclick="transpose(1)">Transpose Naik</button>
+  <button onclick="transpose(-1)">Transpose Turun</button>
+
+  <script>
+    const chords = ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"];
+    function transpose(step) {
+      const pre = document.getElementById("chords");
+      let text = pre.innerText;
+      let regex = new RegExp("\\b(" + chords.join("|") + ")\\b", "g");
+      text = text.replace(regex, function(match) {
+        let i = chords.indexOf(match);
+        let newChord = chords[(i + step + chords.length) % chords.length];
+        return newChord;
+      });
+      pre.innerText = text;
+    }
+  </script>
+</body>
+</html>
